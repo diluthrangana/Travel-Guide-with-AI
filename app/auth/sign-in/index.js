@@ -1,13 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native';
 import tw from 'twrnc';
-import { useNavigation } from 'expo-router';
+import { useNavigation, useRouter } from 'expo-router';
+import {  signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './../../../configs/firebase';
 
 
 
 export default function SignIn() {
     const navigation = useNavigation()
     const router= useRouter()
+
+    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+    const onSignIn=()=>{
+      signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log("gggggggggggggggggggggggggggggggggggggg")
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+    }
 
     useEffect(()=>{
         navigation.setOptions({
@@ -28,13 +46,15 @@ export default function SignIn() {
           placeholder="Email"
           keyboardType="email-address"
           autoCapitalize="none"
+          onChangeText={setEmail}
         />
         <TextInput
           style={tw`w-full p-3 mb-4 border border-gray-300 rounded-md`}
           placeholder="Password"
           secureTextEntry
+          onChangeText={setPassword}
         />
-        <TouchableOpacity onPress={()=>router.replace(auth/sign-up)} style={tw`w-full p-3 bg-blue-500 rounded-md`}>
+        <TouchableOpacity onPress={onSignIn} style={tw`w-full p-3 bg-blue-500 rounded-md`}>
           <Text style={tw`text-center text-white text-lg`}>Login</Text>
         </TouchableOpacity>
       </View>
