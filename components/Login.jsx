@@ -21,7 +21,12 @@ const router=useRouter();
 
         <TouchableOpacity style={styles.button}
         onPress={()=>router.push('auth/sign-up/')}>
-          <Text style={styles.buttonText}>Sign In With Google</Text>
+          <Text style={styles.buttonText}>Sign Up With Google</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button}
+        onPress={()=>router.push('auth/sign-in/')}>
+          <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
       </View>

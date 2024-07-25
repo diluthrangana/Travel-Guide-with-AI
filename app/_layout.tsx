@@ -10,8 +10,8 @@ export default function RootLayout() {
     'outfit':require('./../assets/fonts/Outfit-Regular.ttf'),
   })
   return (
-    <Stack screenOptions={{headerShown:false}}>
-      <Stack.Screen name="index" />
+    <Stack >
+      <Stack.Screen name="(tabs)" />
     </Stack>
   );
 }

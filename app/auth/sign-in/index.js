@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import tw from 'twrnc';
 import { useNavigation, useRouter } from 'expo-router';
-import {  signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './../../../configs/firebase';
 
-
-
 export default function SignIn() {
-    const navigation = useNavigation()
-    const router= useRouter()
+  const navigation = useNavigation();
+  const router = useRouter();
 
-    const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-    const onSignIn=()=>{
-      signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log("gggggggggggggggggggggggggggggggggggggg")
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-    }
+  const onSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log('User signed in:', user);
+        router.push('/mytrip');
+        // Redirect to the desired page
+        
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Error signing in:', errorCode, errorMessage);
+      });
+  };
 
-    useEffect(()=>{
-        navigation.setOptions({
-            headerShown: false
-        })
-    },[])
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false
+    });
+  }, []);
 
   return (
     <View style={tw`flex-1 bg-white`}>

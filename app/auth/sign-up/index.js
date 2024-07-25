@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import tw from 'twrnc';
-import { useRouter } from 'expo-router';
+import { useNavigation,useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './../../../configs/firebase';
 
 export default function Signup() {
   const router = useRouter();
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
@@ -26,6 +27,12 @@ export default function Signup() {
         console.error('Error signing up:', errorCode, errorMessage);
       });
   };
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: false
+    });
+  }, []);
 
   return (
     <View style={tw`flex-1 bg-white`}>
