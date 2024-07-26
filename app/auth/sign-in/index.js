@@ -31,7 +31,7 @@ export default function SignIn() {
 
   useEffect(() => {
     navigation.setOptions({
-      headerShown: false
+      
     });
   }, []);
 
