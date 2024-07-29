@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './../components/Login';
-import { auth } from './../configs/firebase';
+import Login from '../components/Login';
+import { auth } from '../configs/firebase';
 import { Redirect, useRouter } from 'expo-router';
 
 export default function Index() {
@@ -10,7 +10,7 @@ export default function Index() {
 
   return (
     <View style={{ flex: 1 }}>
-      {user? <Redirect href={'/mytrip'}/>:<Login/>}
+      {user? <Redirect href={'/mytrip'}/>:<Redirect href={'/mytrip'}/>}
     </View>
   );
 }
