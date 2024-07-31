@@ -33,7 +33,7 @@ const SearchPlace = () => {
   };
 
   const PressContinueSearchPlace = () => {
-    router.push('/create-trip/select-dates')
+    router.push('/create-trip/select-traveller')
     setTripData({ ...tripData, Area: query })
   };
 

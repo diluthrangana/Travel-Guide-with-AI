@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native'
-import React, {useContext, useEffect} from 'react'
+import { View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { useRouter, useNavigation } from 'expo-router';
+import tw from 'twrnc';
 import CreateTripContext from './../../context/CreateTripContext';
-import { useNavigation } from 'expo-router';
 
 export default function reviewtrip() {
 
     const navigation=useNavigation()
+    const router=useRouter()
     const { tripData, setTripData } = useContext(CreateTripContext);
 
     useEffect(() => {
@@ -17,8 +19,13 @@ export default function reviewtrip() {
       }, [navigation]);
 
   return (
-    <View>
-      <Text>{tripData.budget}</Text>
+    <View style={{marginTop:100}}>
+      <TouchableOpacity
+          style={tw`bg-blue-500 rounded-full py-2 px-4`}
+          onPress={()=>router.push('/create-trip/generate-trip')}
+        >
+          <Text style={tw`text-white text-center font-semibold`}>Continue</Text>
+        </TouchableOpacity>
     </View>
   )
 }
