@@ -48,13 +48,13 @@ const SearchPlace = () => {
             placeholder="Enter a place"
             renderTextInput={(props) => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <MaterialIcons name="search" size={20} style={{ marginRight: 10 }} />
+                <MaterialIcons name="search" size={20} style={{ marginRight: 10,paddingLeft:10 }} />
                 <TextInput
                   {...props}
                   style={{
                     height: 40,
                     borderColor: '#ccc',
-                    borderWidth: 1,
+                    borderWidth: 0,
                     flex: 1,
                     paddingLeft: 8,
                   }}
