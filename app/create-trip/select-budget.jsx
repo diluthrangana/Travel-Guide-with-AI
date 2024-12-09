@@ -62,7 +62,7 @@ export default function SelectBudget() {
       />
       <View style={{ marginTop: 150 }}>
         <TouchableOpacity
-          style={tw`bg-blue-500 rounded-full py-2 px-4`}
+          style={tw`bg-blue-500 rounded-full py-2 px-4 mb-6`}
           onPress={PressContinueSelectBudget}
         >
           <Text style={tw`text-white text-center font-semibold`}>Start Now</Text>

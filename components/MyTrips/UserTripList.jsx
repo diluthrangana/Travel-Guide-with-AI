@@ -2,38 +2,99 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import React from 'react';
 
 export default function UserTripList({ userTrips }) {
+  // Sort the trips in descending order by docId
+  const sortedTrips = [...(userTrips || [])].sort((a, b) => b.docId - a.docId);
+
   // Render a single trip item
-  const renderItem = ({ item }) => (
-    <View style={styles.cardContainer}>
-      <Text style={styles.tripAreaText}>Trip Plan for {item.tripData?.Area || 'Unknown Area'}</Text>
-      
-      <Text style={styles.sectionTitle}>Itinerary:</Text>
-      {item.tripPlan?.itinerary?.map((dayPlan, index) => (
-        <View key={index} style={styles.itineraryContainer}>
-          <Text style={styles.dayText}>Day {index + 1}: {dayPlan.day}</Text>
-          {dayPlan.activities.map((activity, activityIndex) => (
-            <Text key={activityIndex} style={styles.activityText}>
-              - {activity.name}: {activity.cost}
+  const renderItem = ({ item }) => {
+    const tripData = item?.tripData || {};
+    const tripPlan = item?.tripPlan || {};
+    const itinerary = tripPlan?.itinerary || [];
+    const hotels = tripPlan?.hotels || [];
+    const summary = tripPlan?.summary || {};
+    const tripDetails = tripPlan?.tripDetails || {};
+
+    return (
+      <View style={styles.cardContaSiner}>
+        <Text style={styles.tripAreaText}>
+          Trip Plan for {tripData?.Area || 'Unknown Area'}
+        </Text>
+
+        <Text style={styles.sectionTitle}>Itinerary:</Text>
+        {itinerary.length > 0 ? (
+          itinerary.map((dayPlan, index) => (
+            <View key={index} style={styles.itineraryContainer}>
+              <Text style={styles.dayText}>Day {index + 1}</Text>
+              {dayPlan.activities?.length > 0 ? (
+                dayPlan.activities.map((activity, activityIndex) => (
+                  <Text key={activityIndex} style={styles.activityText}>
+                    {activity.place || 'Unknown Place'} -{' '}
+                    {activity.description || 'No Description'}: {activity.cost || 'N/A'}
+                  </Text>
+                ))
+              ) : (
+                <Text style={styles.activityText}>No activities available</Text>
+              )}
+            </View>
+          ))
+        ) : (
+          <Text style={styles.detailText}>No itinerary available</Text>
+        )}
+
+        <Text style={styles.sectionTitle}>Hotel Details:</Text>
+        {hotels.length > 0 ? (
+          <>
+            <Text style={styles.detailText}>
+              Address: {hotels[0]?.address || 'Unknown'}
             </Text>
-          ))}
-        </View>
-      ))}
-      
-      <Text style={styles.sectionTitle}>Trip Details:</Text>
-      <Text style={styles.detailText}>Budget: {item.tripPlan?.trip_details?.budget || 'Unknown'}</Text>
-      <Text style={styles.detailText}>Destination: {item.tripPlan?.trip_details?.destination || 'Unknown'}</Text>
-      <Text style={styles.detailText}>Duration: {item.tripPlan?.trip_details?.duration || 'Unknown'}</Text>
-      <Text style={styles.detailText}>Interests: {item.tripPlan?.trip_details?.interests?.join(', ') || 'Unknown'}</Text>
-      <Text style={styles.detailText}>Start Location: {item.tripPlan?.trip_details?.start_location || 'Unknown'}</Text>
-    </View>
-  );
+            <Text style={styles.detailText}>
+              Name: {hotels[0]?.name || 'Unknown'}
+            </Text>
+            <Text style={styles.detailText}>
+              Price: {hotels[0]?.price || 'Unknown'}
+            </Text>
+          </>
+        ) : (
+          <Text style={styles.detailText}>No hotel information available</Text>
+        )}
+
+        <Text style={styles.sectionTitle}>Summary:</Text>
+        <Text style={styles.detailText}>
+          Note: {summary?.notes || 'No notes available'}
+        </Text>
+        <Text style={styles.detailText}>
+          Total Cost: {hotels?.totalCost || 'Unknown'}
+        </Text>
+
+        <Text style={styles.sectionTitle}>Trip Details:</Text>
+        <Text style={styles.detailText}>
+          Budget: {tripDetails?.budget || 'Unknown'}
+        </Text>
+        <Text style={styles.detailText}>
+          Travellers: {tripDetails?.travelerCount || 'Unknown'}
+        </Text>
+        <Text style={styles.detailText}>
+          Start Date: {tripDetails?.startDate || 'Unknown'}
+        </Text>
+        <Text style={styles.detailText}>
+          End Date: {tripDetails?.endDate || 'Unknown'}
+        </Text>
+        <Text style={styles.detailText}>
+          Location: {tripDetails?.location || 'Unknown'}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <FlatList
-      data={userTrips}
+      data={sortedTrips}
       renderItem={renderItem}
-      keyExtractor={(item) => item.docId}
+      keyExtractor={(item) => item?.docId || Math.random().toString()} // Fallback key if docId is missing
       contentContainerStyle={styles.listContainer}
+      ListEmptyComponent={
+        <Text style={styles.emptyText}>No trips available</Text>
+      }
     />
   );
 }
@@ -81,5 +142,12 @@ const styles = StyleSheet.create({
   detailText: {
     fontSize: 14,
     marginBottom: 4,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginTop: 20,
+    color: '#888',
   },
 });

@@ -51,7 +51,7 @@ export default function MyTrip() {
   };
 
   return (
-    <View style={tw`flex-1`}>
+    <View style={tw`flex-1 mt-5`}>
       {loading && <ActivityIndicator size={'large'} />}
       <View>
         {userTrips?.length === 0 ? (
