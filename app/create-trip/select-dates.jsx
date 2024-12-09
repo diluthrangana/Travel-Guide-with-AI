@@ -51,7 +51,7 @@ export default function SelectDates() {
   };
 
   return (
-    <View style={tw`flex-1 justify-center items-center`}>
+    <View style={tw`flex-1 items-center`}>
       <View style={{ marginTop: 100 }}>
         <CalendarPicker
           onDateChange={onDateChange}
@@ -61,7 +61,7 @@ export default function SelectDates() {
       </View>
       <View>
         <TouchableOpacity
-          style={tw`bg-blue-500 rounded-full py-2 px-4 mt-4`}
+          style={tw`bg-blue-500 rounded-full py-2 px-4 mt-80`}
           onPress={handlePress}
         >
           <Text style={tw`text-white text-center font-semibold`}>

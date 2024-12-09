@@ -8,7 +8,7 @@ export default function StartNewTripCard() {
 const router= useRouter();
 
   return (
-    <View style={tw`p-4`}>
+    <View style={tw`p-4 `}>
       <View style={tw`bg-white rounded-lg shadow-lg p-6`}>
         <Text style={tw`text-xl font-bold mb-2`}>Start New Trip</Text>
         <Text style={tw`text-gray-700 mb-4`}>

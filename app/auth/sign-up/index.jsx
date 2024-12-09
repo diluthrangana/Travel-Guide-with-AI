@@ -66,6 +66,25 @@ export default function Signup() {
         source={require('./../../../assets/images/background1.png')}
         style={{ width: '100%', height: '50%' }}
       />
+      <View
+    style={{
+      position: 'absolute',
+      top: '15%', // Adjust to bring it vertically to the center of the background
+      left: 0,
+      right: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Image
+      source={require('./../../../assets/images/logo1.png')}
+      style={{
+        width: 150, // Adjust as needed
+        height: 150, // Adjust as needed
+        resizeMode: 'contain',
+      }}
+    />
+  </View>
       <View style={tw`flex-1 justify-center items-center p-4`}>
         <Text style={tw`text-2xl font-bold mb-4`}>Sign Up</Text>
         <Animated.View style={[tw`w-full mb-4`, { opacity: usernameAnim, transform: [{ scale: usernameAnim }] }]}>

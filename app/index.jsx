@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from '../components/Login';
+import Login from './Login';
 import { auth } from '../configs/firebase';
 import { Redirect, useRouter } from 'expo-router';
 

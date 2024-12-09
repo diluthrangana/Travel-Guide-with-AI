@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouter, useNavigation } from 'expo-router';
 import tw from 'twrnc';
 import CreateTripContext from './../../context/CreateTripContext';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function SelectBudget() {
   const navigation = useNavigation();
@@ -11,9 +12,9 @@ export default function SelectBudget() {
   const { tripData, setTripData } = useContext(CreateTripContext);
 
   const selectBudgetList = [
-    { title: 'Budget', amount: '10000', desc: 'Description for budget 1' },
-    { title: 'Comfort', amount: '50000', desc: 'Description for budget 2' },
-    { title: 'Luxury', amount: '100000', desc: 'Description for budget 3' },
+    { title: 'Budget', amount: '10000', desc: 'Description for budget 1', icon: 'attach-money' },
+    { title: 'Comfort', amount: '50000', desc: 'Description for budget 2', icon: 'star-rate' },
+    { title: 'Luxury', amount: '100000', desc: 'Description for budget 3', icon: 'grade' },
   ];
 
   useEffect(() => {
@@ -46,19 +47,22 @@ export default function SelectBudget() {
             ]}
             onPress={() => handleBudgetSelect(item.amount, index)}
           >
-            <View>
-              <Text style={[styles.title,selectedBudget === index && styles.selectedCardTitle,]}>{item.title}</Text>
-              <Text style={styles.desc}>{item.desc}</Text>
-              <Text style={styles.amount}>{item.amount}</Text>
+            <View style={styles.cardContent}>
+              <View style={styles.textContainer}>
+                <Text style={[styles.title, selectedBudget === index && styles.selectedCardTitle]}>{item.title}</Text>
+                <Text style={styles.desc}>{item.desc}</Text>
+                <Text style={styles.amount}>{item.amount}</Text>
+              </View>
+              <MaterialIcons name={item.icon} size={50} color={selectedBudget === index ? '#0056b3' : '#666'} style={styles.icon} />
             </View>
           </TouchableOpacity>
         )}
         keyExtractor={(item, index) => index.toString()}
         contentContainerStyle={styles.list}
       />
-      <View>
+      <View style={{ marginTop: 150 }}>
         <TouchableOpacity
-          style={tw`bg-blue-500 rounded-full py-2 px-4 mt-4`}
+          style={tw`bg-blue-500 rounded-full py-2 px-4`}
           onPress={PressContinueSelectBudget}
         >
           <Text style={tw`text-white text-center font-semibold`}>Start Now</Text>
@@ -92,10 +96,10 @@ const styles = StyleSheet.create({
   selectedCard: {
     backgroundColor: '#f0f5ff',
   },
-  selectedCardTitle:{
+  selectedCardTitle: {
     fontSize: 20,
-    color: '#000000',
-},
+    color: '#666666',
+  },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -109,5 +113,17 @@ const styles = StyleSheet.create({
   amount: {
     fontSize: 14,
     color: '#999',
+  },
+  cardContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  textContainer: {
+    flex: 1,
+  },
+  icon: {
+    marginLeft: 10,
+    opacity:0.5
   },
 });

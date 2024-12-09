@@ -53,14 +53,33 @@ export default function SignIn() {
   }, []);
 
   return (
-    <View style={tw`flex-1 bg-white`}>
+    <View style={tw`flex-1 bg-white `}>
       <Image
         source={require('./../../../assets/images/background1.png')}
         style={{ width: '100%', height: '50%' }}
       />
-      <View style={tw`flex-1 justify-center items-center p-4`}>
+      <View
+    style={{
+      position: 'absolute',
+      top: '15%', // Adjust to bring it vertically to the center of the background
+      left: 0,
+      right: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Image
+      source={require('./../../../assets/images/logo1.png')}
+      style={{
+        width: 150, // Adjust as needed
+        height: 150, // Adjust as needed
+        resizeMode: 'contain',
+      }}
+    />
+  </View>
+      <View style={tw`flex-1 justify-center items-center p-4 bg-transparent`}>
         <Text style={tw`text-2xl font-bold mb-4`}>Login</Text>
-        <Animated.View style={[tw`w-full mb-4`, { opacity: emailAnim, transform: [{ scale: emailAnim }] }]}>
+        <Animated.View style={[tw`w-full mb-4 `, { opacity: emailAnim, transform: [{ scale: emailAnim }] }]}>
           <TextInput
             style={tw`w-full p-3 border border-gray-300 rounded-md`}
             placeholder="Email"
