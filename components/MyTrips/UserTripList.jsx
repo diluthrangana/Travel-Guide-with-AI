@@ -15,7 +15,7 @@ export default function UserTripList({ userTrips }) {
     const tripDetails = tripPlan?.tripDetails || {};
 
     return (
-      <View style={styles.cardContaSiner}>
+      <View style={styles.cardContainer}>
         <Text style={styles.tripAreaText}>
           Trip Plan for {tripData?.Area || 'Unknown Area'}
         </Text>
